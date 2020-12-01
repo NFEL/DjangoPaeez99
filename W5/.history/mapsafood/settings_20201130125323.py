@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'django_extensions',
     'django.contrib.gis ',
 
@@ -107,7 +108,7 @@ WSGI_APPLICATION = 'mapsafood.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mapsafood',
         'USER': 'nfel',
         'PASSWORD': '1',
