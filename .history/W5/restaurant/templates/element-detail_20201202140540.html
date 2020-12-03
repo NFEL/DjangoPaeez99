@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+جزئیات {{element.name}}
+{% endblock title %}
+
+{% block content %}
+<h1>صفحه {{element.name}} </h1>
+<p>نام:‌{{ element.name }}</p>
+<p>رتبه: {{ element.rate }}</p>
+
+<ul>
+    {% for location in locations %}
+    <li>
+        {{location.city}}
+    </li><li>
+        {{location.state}}
+        </li>  <li>
+        {{location.more}}
+        </li> <li>
+        <div style='width:350px;height:350px'>
+        {{ location.map|safe }} 
+        </div>
+
+    </li>
+    <li>
+        <label>Distance from you</label>
+        <form action="" method="POST" >
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" >calculate</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

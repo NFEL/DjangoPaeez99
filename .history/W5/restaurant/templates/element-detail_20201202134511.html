@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+جزئیات {{element.name}}
+{% endblock title %}
+
+{% block content %}
+<h1>صفحه {{element.name}} </h1>
+<p>نام:‌{{ element.name }}</p>
+<p>رتبه: {{ element.rate }}</p>
+
+<ul>
+    {% for location in locations %}
+    <li>
+        {{location.city}}
+        <br>
+        {{location.state}}
+        <br>  
+        <div style='width:350px;height:350px'>
+        {{ location.map|safe }} 
+        </div>
+
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

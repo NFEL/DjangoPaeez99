@@ -6,6 +6,7 @@ attrs==20.3.0
 autopep8==1.5.4
 backcall==0.2.0
 bleach==3.2.1
+branca==0.4.1
 certifi==2020.6.20
 cffi==1.14.3
 chardet==3.0.4
@@ -15,6 +16,7 @@ Django==3.1.2
 django-debug-toolbar==3.1.1
 django-extensions==3.0.9
 entrypoints==0.3
+folium==0.11.0
 graphviz==0.14.2
 idna==2.10
 ipykernel==5.3.4
@@ -39,6 +41,7 @@ nbconvert==6.0.7
 nbformat==5.0.8
 nest-asyncio==1.4.2
 notebook==6.1.4
+numpy==1.19.4
 packaging==20.4
 pandocfilters==1.4.3
 parso==0.7.1
