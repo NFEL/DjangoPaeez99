@@ -31,8 +31,11 @@
         <form action="" method="POST" autocomplete="off">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit" >calculate</button>
+      <input type="submit" value="Calculate">
         </form>
+        <div style='width:350px;height:350px'>
+        {{ user_location|safe }} 
+        </div>
     </li>
     {% endfor %}
 </ul>

@@ -10,6 +10,6 @@
 <p>{{ name }}</p>
 
 {% for e in elements %}
-<a href="{% url 'element-detail' elem_id=e.id %}">{{e.name}}</a>
+<a href="{% url 'element-detail' elem_id=e.id service_radius=25 %}">{{e.name}}</a>
 {% endfor %}
 {% endblock content %}

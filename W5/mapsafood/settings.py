@@ -107,6 +107,16 @@ WSGI_APPLICATION = 'mapsafood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# MAP_WIDGETS = {
+#     "GooglePointFieldWidget": (
+#         ("zoom", 15),
+#         ("mapCenterLocationName", "london"),
+#         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}}),
+#         ("markerFitZoom", 12),
+#     ),
+#     "GOOGLE_MAP_API_KEY": "<google-api-key>"
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',

@@ -1,4 +1,7 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render, get_object_or_404
+# from django.contrib.gis.geos import GEOSGeometry
+from django.http import HttpResponseRedirect
 import folium
 from folium.vector_layers import path_options
 
@@ -6,7 +9,7 @@ from geolocation import geolocator
 
 from .models import Category, Element, ElementAddress
 
-from .forms import NearByReastaurantsForm
+from .forms import MarketEntryForm
 
 def element_list(request, cat_id, cat_title):
     category_obj = get_object_or_404(Category, id=cat_id)
@@ -21,7 +24,7 @@ def element_list(request, cat_id, cat_title):
 
 
 def element_detail(request, elem_id, service_radius):
-
+    
     element = get_object_or_404(Element, id=elem_id)
     # location = ElementAddress.objects.get(element=element)
 
@@ -36,35 +39,31 @@ def element_detail(request, elem_id, service_radius):
         except Exception:
             pass
         map = folium.Map(location=loc.location,zoom_start=20)
-        folium.vector_layers.Circle(loc.location,service_radius,folium.vector_layers.path_options(fill=True)).add_to(map)
+        folium.vector_layers.Circle(loc.location,service_radius,fill=True).add_to(map)
         folium.vector_layers.Marker(loc.location).add_to(map)
         
-        print(folium.vector_layers.path_options(fill=True,fill_opacity=0.7))
 
 
-        # lon =50.25
-        # lat =-20.0
-
-        # map_new = folium.map(location=(lon,lat),zoom_start=20)
-        
-
-
-        # folium.vector_layers.Marker(location=(51,-19.0215),path_options={
-        #     'fill':'red',
-        #     'stroke' : '5px',
-        # }).add_to(map_new)
-        
-        # folium.vector_layers.Circle(location=(51,-19.0215),path_options={}).add_to(map_new)
-        
 
         tmp['map'] = map._repr_html_()
         locations.append(tmp)
 
-    form = NearByReastaurantsForm(request.POST or None)
+    form = MarketEntryForm(request.POST or None)
     if form.is_valid():
         f = form.save(commit=False)
         
     # elements = Element.objects.filter(category=category_obj)
+
+    if request.method == 'POST':
+        
+        form = MarketEntryForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            user_location = form.cleaned_data.get('point')
+            print(form.cleaned_data.get('point'))
+
+            disctance = locations.distance()
+
 
 
     context = {
