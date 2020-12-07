@@ -61,7 +61,17 @@ INSTALLED_APPS = [
     'restaurant',
 
     'crispy_forms',    
+    'leaflet',
 ]
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (32.24997445586331, 53.61328125000001),
+'DEFAULT_ZOOM': 5,
+'MIN_ZOOM': 3,
+'MAX_ZOOM': 18,
+'DEFAULT_PRECISION': 6,
+}
+
 # DJANGO_ALLOW_ASYNC_UNSAFE = False
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 

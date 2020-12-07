@@ -2,7 +2,6 @@
 
 {% load crispy_forms_tags %}
 
-
 {% block title %}
 جزئیات {{element.name}}
 {% endblock title %}
@@ -12,29 +11,82 @@
 <p>نام:‌{{ element.name }}</p>
 <p>رتبه: {{ element.rate }}</p>
 
+
+<br>
+<br>
+
+
+        <div>
+        <h1>Your Location</h1>
+        <hr style='width:65%;margin:auto;'>
+        <form method="POST" id='map' style='width:75%;margin:auto;'>
+{% comment %} 
+        <script type="text/javascript">
+            window.addEventListener("map:init", function (e) {
+                var detail = e.detail;
+                detail.map.setView({{user_location}}, 10);
+            }, false);
+        </script> {% endcomment %}
+
+
+<script>
+    window.addEventListener("map:init", function (e) {
+        var detail = e.detail;
+        {% comment %} L.marker({{ user_location }}).addTo(detail.map); {% endcomment %}
+        detail.map.setView({{user_location}}, 10);
+    }, false);
+</script>
+
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Calculate">
+        </form>
+        </div>
+
+        <br>
+        <br>
+        <h1>Available Restaurants </h1>
+        <hr style='width:65%;margin:auto;'>
+        <br>
+        <br>
+
 <ul>
     {% for location in locations %}
+    {% if location.status %}
+    
+    <li><h2>  {{location.status }} </h2></li>
+    {% endif %}
+    {% if location.service_area  %}
+    <li>
+    {{location.service_area}} Meter
+    </li>
+    {% endif %}
     <li>
         {{location.city}}
-    </li><li>
-        {{location.state}}
-        </li>  <li>
-        {{location.more}}
-        </li> <li>
-        <div style='width:350px;height:350px'>
-        {{ location.map|safe }} 
-        </div>
     </li>
     <li>
-        <label>Distance from you</label>
-        <hr>
-        <form action="" method="POST" autocomplete="off">
-        {% csrf_token %}
-        {{form.as_p}}
-      <input type="submit" value="Calculate">
-        </form>
-        <div style='width:350px;height:350px'>
-        {{ user_location|safe }} 
+        {{location.state}}
+        </li>  
+        {% if location.distance %}
+        <li>
+        {{location.more}} 
+        </li><li>You are {{location.distance}}km away from here
+        </li>
+        {% endif %}
+        
+        {% if location.distance == None %}
+
+<li>
+        {{location.more}}
+        </li>
+        
+
+        {% endif %}
+
+        
+         <li>
+        <div style='width:500px;height:400px'>
+        {{ location.map|safe }} 
         </div>
     </li>
     {% endfor %}

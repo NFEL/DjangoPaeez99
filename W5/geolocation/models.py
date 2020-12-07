@@ -1,5 +1,6 @@
 # from django.db import models
 from django.contrib.gis.db import models
+from django.contrib.gis.db.models.fields import GeometryField
 
 
 class TehAddressManager(models.Manager):
@@ -23,7 +24,8 @@ class Address(models.Model):
     priority_address = models.SmallIntegerField(default=1)
 
     location = models.PointField('موقعیت جغرافیایی',geography=True)
-
+    service_radius = models.IntegerField('شعاع فعالیت' , null=True)
+    service_area = models.GeometryField(blank=True, null=True)
     # created_date = models.DateTimeField()
 
     objects = models.Manager()

@@ -1,4 +1,5 @@
 {% load static %}
+{% load leaflet_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +13,20 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> {% endcomment %}
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+  
 
+     {% leaflet_js plugins="forms" %}
+   {% leaflet_css plugins="forms" %}
+  
         <style>
             body {
                 direction: rtl;
                 background-color: gray;
             }
         </style>
-
+{% block head_plugins %}
+    {% endblock head_plugins %}
+    
     </head>
 
     <body>
